@@ -2,10 +2,9 @@
 
 这是一个 React 脚手架
 
-[x] babel 转译（@babel/preset-typescript）
+1. typescript 支持
 
-[x] import '.css' 方式导入
+   通过 babel 进行直接转译，不需要 tsc 或者 ts-node
 
-[x] React 组件热重载
-
-[x] webpack 打包（开发&生产环境） 
+2. 支持 `import 'style.css' `方式导入样式文件
+3. React 组件实时热重载
