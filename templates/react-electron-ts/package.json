@@ -1,0 +1,67 @@
+{
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron-forge start",
+    "prod": "cross-env NODE_ENV=production ts-node start.ts",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@types/lodash": "^4.14.177",
+    "@types/node": "^16.11.11",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/webpack-dev-server": "^4.5.0",
+    "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
+    "electron": "^16.0.3",
+    "html-webpack-plugin": "^5.5.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2",
+    "webpack": "^5.64.4",
+    "webpack-dev-server": "^4.6.0",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": ""
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
