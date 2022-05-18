@@ -1,8 +1,16 @@
+/*
+ * @Author       : Kevin Jobs
+ * @Date         : 2022-05-09 21:14:35
+ * @LastEditTime : 2022-05-17 11:59:14
+ * @lastEditors  : Kevin Jobs
+ * @FilePath     : \template-react-ts\start.js
+ * @Description  : 
+ */
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
 
-const prodConfig = require('./build/webpack.prod');
-const devConfig = require('./build/webpack.dev');
+const prodConfig = require('./webpack/webpack.prod');
+const devConfig = require('./webpack/webpack.dev');
 
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -18,6 +26,10 @@ if (IS_DEV) {
   runBuild(compiler);
 }
 
+/**
+ * 生成生产环境
+ * @param {object} compiler webpack compiler
+ */
 function runBuild(compiler) {
   compiler.run((err, stats) => {
     if (err) {
@@ -38,6 +50,11 @@ function runBuild(compiler) {
   })
 }
 
+/**
+ * 开发服务器
+ * @param {object} compiler webpack compiler
+ * @param {object} opts webpack dev server options
+ */
 function runServer(compiler, opts) {
   const server = new webpackDevServer(opts, compiler);
   server.startCallback(() => {
