@@ -1,7 +1,7 @@
 /*
  * @Author       : Kevin Jobs
  * @Date         : 2022-05-09 21:26:56
- * @LastEditTime : 2022-05-18 15:29:41
+ * @LastEditTime : 2022-06-07 23:02:39
  * @lastEditors  : Kevin Jobs
  * @FilePath     : \react-ts\src\App.tsx
  * @Description  : 
@@ -17,10 +17,10 @@ function App() {
   }
 
   return (
-    <div className='my-app' style={{textAlign: 'center'}}>
+    <div className='my-app' style={{textAlign: "center"}}>
       <h2>hello, world!</h2>
       <div><button onClick={handleClick}>show banner</button></div>
-      <div id="banner" style={{visibility: isVisible ? 'visible': 'hidden'}}>
+      <div id="banner" style={{visibility: isVisible ? "visible": "hidden"}}>
         <p>这个条幅可以在修改时保持状态，你可以尝试修改</p>
       </div>
     </div>
