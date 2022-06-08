@@ -1,9 +1,9 @@
 /*
  * @Author       : Kevin Jobs
  * @Date         : 2022-05-09 21:26:56
- * @LastEditTime : 2022-06-08 21:50:31
+ * @LastEditTime : 2022-06-09 00:12:58
  * @lastEditors  : Kevin Jobs
- * @FilePath     : \react-ts\src\App.tsx
+ * @FilePath     : \react-electron-typescript\src\renderer\App.tsx
  * @Description  :
  */
 import React from "react";
@@ -41,7 +41,7 @@ function App() {
         </button>
       </div>
       <div id="banner" style={{ visibility: isVisible ? "visible" : "hidden" }}>
-        <p>这个条幅可以在修改时保持状态，你可以尝试修改</p>
+        <p>这个条幅可以在修改时保持状态...你可以尝试修改</p>
       </div>
       <p>测试 react-redux 的功能</p>
       <button onClick={() => dispatch(increment())}>+1</button>

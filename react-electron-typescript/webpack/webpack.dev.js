@@ -1,7 +1,7 @@
 /*
  * @Author       : Kevin Jobs
  * @Date         : 2022-05-09 21:01:13
- * @LastEditTime : 2022-06-08 22:26:40
+ * @LastEditTime : 2022-06-09 00:08:05
  * @lastEditors  : Kevin Jobs
  * @FilePath     : \react-electron-typescript\webpack\webpack.dev.js
  * @Description  : 
@@ -14,7 +14,7 @@ const { reactRefreshPlugin } = require('./plugins');
 
 const { rendererPort } = require("../config");
 
-const srcPath = path.join(__dirname, '../src');
+const srcPath = path.join(__dirname, '../src/renderer');
 
 module.exports = merge(baseConfig, {
   mode: 'development',

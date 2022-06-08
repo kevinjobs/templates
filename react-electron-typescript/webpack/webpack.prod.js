@@ -1,9 +1,9 @@
 /*
  * @Author       : Kevin Jobs
  * @Date         : 2022-05-09 21:16:16
- * @LastEditTime : 2022-06-07 23:24:32
+ * @LastEditTime : 2022-06-09 00:08:08
  * @lastEditors  : Kevin Jobs
- * @FilePath     : \react-ts\webpack\webpack.prod.js
+ * @FilePath     : \react-electron-typescript\webpack\webpack.prod.js
  * @Description  : 
  */
 const path = require('path');
@@ -11,7 +11,7 @@ const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const { jsRules } = require('./rules');
 
-const srcPath = path.join(__dirname, '../src');
+const srcPath = path.join(__dirname, '../src/renderer');
 
 module.exports = merge(baseConfig, {
   mode: 'production',

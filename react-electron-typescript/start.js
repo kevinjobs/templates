@@ -1,7 +1,7 @@
 /*
  * @Author       : Kevin Jobs
  * @Date         : 2022-05-09 21:14:35
- * @LastEditTime : 2022-06-08 23:37:11
+ * @LastEditTime : 2022-06-09 00:04:57
  * @lastEditors  : Kevin Jobs
  * @FilePath     : \react-electron-typescript\start.js
  * @Description  : 
@@ -20,17 +20,17 @@ const NODE_ENV = process.env.NODE_ENV;
 console.log(`NODE_ENV is ${NODE_ENV}.`);
 
 const IS_DEV = NODE_ENV === 'development';
-const distMainPath = ["./dist/main.js"];
+const distMainPath = "./dist/main.js";
 
 if (IS_DEV) {
   const compiler = webpack(devConfig);
   const mainCompiler = webpack(mainConfig);
 
-  // runBuild(mainCompiler);
-
-  // runServer(compiler, devConfig.devServer);
-
-  runElectron(distMainPath);
+  runBuild(mainCompiler, () => {
+    runServer(compiler, devConfig.devServer, () => {
+      runElectron(distMainPath);
+    });
+  });
 } else {
   const compiler = webpack(prodConfig);
   runBuild(compiler);
@@ -40,7 +40,7 @@ if (IS_DEV) {
  * 生成生产环境
  * @param {object} compiler webpack compiler
  */
-function runBuild(compiler) {
+function runBuild(compiler, cb) {
   compiler.run((err, stats) => {
     console.log('Start to compile...');
 
@@ -61,6 +61,8 @@ function runBuild(compiler) {
     compiler.close((closeErr) => {
       if (closeErr) {
         console.error(closeErr);
+      } else {
+        cb();
       }
     })
   })
@@ -85,19 +87,11 @@ function runServer(compiler, opts, callback) {
  * @param {args} args args arrary
  */
 function runElectron(args) {
-  const electron = './node_moduels/electron/dist/electron.exe';
+  const cmds = ["electron", args]
 
-  const opts = {
-    stdio: 'inherit',
-    windowsHide: false,
-  }
-
-  const child = proc.spawn(electron, args, opts);
-
-  child.on('close', (code, signal) => {
-    if (code === null) {
-      console.error(electron, 'exited with signal', signal);
-      process.exit(1);
+  proc.exec(cmds.join(" "), (err) => {
+    if (err) {
+      console.log(err);
     }
-  })
+  });
 }
