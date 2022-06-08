@@ -8,7 +8,7 @@
  */
 function jsRulesDev(includePath) {
   return {
-    test: /\.(js|mjs|jsx)$/,
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
     include: includePath,
     exclude: /node_modules/,
     use: {
@@ -16,7 +16,8 @@ function jsRulesDev(includePath) {
       options: {
         presets: [
           '@babel/preset-env',
-          '@babel/preset-react'
+          '@babel/preset-react',
+          '@babel/preset-typescript',
         ],
         plugins: [
           '@babel/plugin-transform-runtime',
@@ -29,14 +30,15 @@ function jsRulesDev(includePath) {
 
 function jsRules(includePath) {
   return {
-    test: /\.(js|mjs|jsx)$/,
+    test: /\.(js|mjs|jsx|ts|tsx)$/,
     include: includePath,
     use: {
       loader: 'babel-loader?cacheDirectory',
       options: {
         presets: [
           '@babel/preset-env',
-          '@babel/preset-react'
+          '@babel/preset-react',
+          '@babel/preset-typescript',
         ],
         plugins: [
           '@babel/plugin-transform-runtime'
@@ -46,19 +48,10 @@ function jsRules(includePath) {
   }
 }
 
-function tsRules(includePath) {
-  return {
-    test: /\.(ts|tsx)$/,
-    include: includePath,
-    use: {
-      loader: 'awesome-typescript-loader'
-    }
-  }
-}
-
 function lessLoader(p) {
   return {
     test: /\.less$/i,
+    include: p,
     use: [
       "style-loader",
       "css-loader",
@@ -70,6 +63,5 @@ function lessLoader(p) {
 module.exports = {
   jsRulesDev,
   jsRules,
-  tsRules,
   lessLoader,
 }
