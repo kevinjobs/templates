@@ -56,8 +56,20 @@ function tsRules(includePath) {
   }
 }
 
+function lessLoader(p) {
+  return {
+    test: /\.less$/i,
+    use: [
+      "style-loader",
+      "css-loader",
+      "less-loader",
+    ]
+  }
+}
+
 module.exports = {
   jsRulesDev,
   jsRules,
   tsRules,
+  lessLoader,
 }

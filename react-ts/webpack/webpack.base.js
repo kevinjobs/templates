@@ -7,7 +7,7 @@
  * @Description  : 
  */
 const path = require('path');
-const { tsRules } = require('./rules');
+const { tsRules, lessLoader } = require('./rules');
 const { htmlPlugin } = require('./plugins');
 
 const srcPath = path.join(__dirname, '../src');
@@ -35,6 +35,7 @@ module.exports = {
   module: {
     rules: [
       tsRules(srcPath),
+      lessLoader(srcPath),
     ],
   },
   plugins: [

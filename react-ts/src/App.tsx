@@ -7,6 +7,7 @@
  * @Description  :
  */
 import React from "react";
+import './App.less';
 
 function App() {
   const [isVisible, setIsVisible] = React.useState(false);
