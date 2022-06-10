@@ -1,7 +1,7 @@
 /*
  * @Author       : Kevin Jobs
  * @Date         : 2022-06-07 22:53:19
- * @LastEditTime : 2022-06-08 22:13:44
+ * @LastEditTime : 2022-06-11 06:32:54
  * @lastEditors  : Kevin Jobs
  * @FilePath     : \react-electron-typescript\.eslintrc.js
  * @Description  :
@@ -25,7 +25,7 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint"],
-  ignorePatterns: [".eslintrc.js", "webpack/*", "start.js", "config/"],
+  ignorePatterns: [".eslintrc.js", "webpack/*", "start.js", "config/", "dist/", "out/"],
   rules: {
     indent: ["error", 2],
     "linebreak-style": ["error", "unix"],

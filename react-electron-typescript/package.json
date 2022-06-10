@@ -1,7 +1,13 @@
 {
+  "name": "react-electron-typescript",
+  "version": "0.0.1",
+  "author": "Kevin Jobs (me@kevinjobs.com)",
+  "main": "./dist/main.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node start.js",
-    "build": "cross-env NODE_ENV=production node start.js"
+    "start": "electron-forge start",
+    "build": "cross-env NODE_ENV=production node start.js",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -9,6 +15,12 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.17.12",
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.0.0-beta.63",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.6",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
@@ -33,8 +45,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
+    "electron-squirrel-startup": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^8.0.2"
-  }
+  },
+  "config": {}
 }

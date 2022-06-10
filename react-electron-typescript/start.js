@@ -1,7 +1,7 @@
 /*
  * @Author       : Kevin Jobs
  * @Date         : 2022-05-09 21:14:35
- * @LastEditTime : 2022-06-09 00:04:57
+ * @LastEditTime : 2022-06-11 05:59:17
  * @lastEditors  : Kevin Jobs
  * @FilePath     : \react-electron-typescript\start.js
  * @Description  : 
@@ -32,8 +32,10 @@ if (IS_DEV) {
     });
   });
 } else {
-  const compiler = webpack(prodConfig);
-  runBuild(compiler);
+  const renderCompiler = webpack(prodConfig);
+  const mainCompiler = webpack(mainConfig);
+  runBuild(renderCompiler, () => {});
+  runBuild(mainCompiler, () => {});
 }
 
 /**
