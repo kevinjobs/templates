@@ -4,7 +4,7 @@
   "author": "Kevin Jobs (me@kevinjobs.com)",
   "main": "./dist/main.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "cross-env NODE_ENV=development node start.js",
     "build": "cross-env NODE_ENV=production node start.js",
     "package": "electron-forge package",
     "make": "electron-forge make"

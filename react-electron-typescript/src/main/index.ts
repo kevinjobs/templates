@@ -7,6 +7,7 @@
  * @Description  :
  */
 import { app, BrowserWindow } from "electron";
+import path from "path";
 
 const isDev = process.env["NODE_ENV"] === "development";
 
@@ -19,9 +20,10 @@ function createWindow() {
     // movable: true,
     // transparent: true,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false, // this config make react use electron.
-      webSecurity: false,
+      preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: false,
+      contextIsolation: true, // this config make react use electron.
+      webSecurity: true,
     },
   });
 

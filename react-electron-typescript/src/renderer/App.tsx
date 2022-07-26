@@ -17,18 +17,28 @@ import {
 } from "./store/slices/couter.slice";
 import store, { AppDispatch } from "./store";
 
+declare global {
+  interface Window {
+    ipc: any
+  }
+}
+
 function AppSon() {
   const count = useSelector(selectCount);
   return <div>{count}</div>;
 }
 
 function App() {
+  (window as any).global = window;
   const dispatch = useDispatch<AppDispatch>();
+
+
 
   const [isVisible, setIsVisible] = React.useState(false);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    window.ipc.sayHello();
     setIsVisible(!isVisible);
   };
 
