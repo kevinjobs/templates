@@ -6,8 +6,9 @@
  * @FilePath     : \react-electron-typescript\src\main\index.ts
  * @Description  :
  */
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
+import { IPC_CODE } from "constant";
 
 const isDev = process.env["NODE_ENV"] === "development";
 
@@ -27,10 +28,10 @@ function createWindow() {
     },
   });
 
-  if (isDev) w.loadURL("http://localhost:9000/");
+  if (isDev) w.loadURL("http://localhost:9000/").then();
   // 生产环境应使用相对地址
   // 打包后的根目录为 app/
-  else w.loadFile("./dist/index.html");
+  else w.loadFile("./dist/index.html").then();
 
   return w;
 }
@@ -52,3 +53,17 @@ app.on("window-all-closed", function () {
     app.quit();
   }
 });
+
+function ipc(ipcCode: string) : any {
+  return (func) => {
+    ipcMain.handle(ipcCode, func);
+  }
+}
+
+export class IPC {
+  @ipc(IPC_CODE.getVersions)
+  static async getVersions(evt, ...args) {
+    console.log(...args);
+    return "16";
+  }
+}

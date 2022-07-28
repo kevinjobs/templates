@@ -10,6 +10,7 @@ const path = require('path');
 const { babelTsLoader } = require("./rules");
 
 const srcMainPath = path.join(__dirname, "../src/main");
+const srcPreloadPath = path.join(__dirname, "../src/preload");
 
 module.exports = {
   target: "electron-main",
@@ -17,7 +18,7 @@ module.exports = {
   devtool: "inline-source-map",
   entry: {
     main: path.join(__dirname, "../src/main/index.ts"),
-    preload: path.join(__dirname, "../src/main/preload.js"),
+    preload: path.join(__dirname, "../src/preload/index.ts"),
   },
   output: {
     path: path.join(__dirname, "../dist"),
@@ -26,13 +27,13 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@": path.join(__dirname, "../src/main")
+      "constant": path.join(__dirname, "../src/constant")
     },
-    extensions: [".ts"],
+    extensions: [".ts", ".js"],
   },
   module: {
     rules: [
-      babelTsLoader(srcMainPath),
+      babelTsLoader(srcMainPath, srcPreloadPath),
     ]
   }
 }

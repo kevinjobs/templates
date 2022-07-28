@@ -48,10 +48,10 @@ function jsRules(includePath) {
   }
 }
 
-function babelTsLoader(p) {
+function babelTsLoader(...p) {
   return {
     test: /\.ts$/,
-    include: p,
+    include: [...p],
     use: {
       loader: 'babel-loader',
       options: {
@@ -61,6 +61,7 @@ function babelTsLoader(p) {
         ],
         plugins: [
           '@babel/plugin-transform-runtime',
+          ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ]
       }
     }

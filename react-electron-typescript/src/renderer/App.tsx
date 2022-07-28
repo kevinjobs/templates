@@ -16,10 +16,11 @@ import {
   selectCount,
 } from "./store/slices/couter.slice";
 import store, { AppDispatch } from "./store";
+import {IPC} from "../preload";
 
 declare global {
   interface Window {
-    ipc: any
+    ipc: IPC;
   }
 }
 
@@ -29,22 +30,27 @@ function AppSon() {
 }
 
 function App() {
-  (window as any).global = window;
   const dispatch = useDispatch<AppDispatch>();
 
-
-
   const [isVisible, setIsVisible] = React.useState(false);
+  const [versions, setVersions] = React.useState("0");
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    window.ipc.sayHello();
+    console.info(window.ipc.sayHello());
     setIsVisible(!isVisible);
   };
+
+  React.useEffect(() => {
+    window.ipc.getVersions().then(v => setVersions(v));
+  }, []);
 
   return (
     <div className="my-app" style={{ textAlign: "center" }}>
       <h2>hello, world!</h2>
+      <div className={"versions"}>
+        <span>{ versions }</span>
+      </div>
       <div>
         <button onClick={handleClick}>
           {isVisible ? "hidden" : "show"} banner
