@@ -1,17 +1,21 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { IPC_CODE } from "constant";
+import { EVENTS } from "constant";
 
 export type IPC = {
-  sayHello(): string;
-  getVersions(): Promise<string>;
+  sendMsg(msg: string): Promise<string>;
+  receiveMsg(): Promise<string>;
 }
 
 const IPC_API: IPC = {
-  sayHello: () :string => {
-    return "hello, world!";
+  sendMsg: async (msg: string) => {
+    return await ipcRenderer.invoke(EVENTS.SEND_MSG.toString(), msg);
   },
-  async getVersions(): Promise<string> {
-    return await ipcRenderer.invoke(IPC_CODE.getVersions);
+  receiveMsg: () => {
+    return new Promise((res, rej) => {
+      ipcRenderer.on(EVENTS.REPLY_MSG.toString(), (evt, msg: string) => {
+        res(msg);
+      })
+    })
   }
 }
 

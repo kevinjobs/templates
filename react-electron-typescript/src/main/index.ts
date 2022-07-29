@@ -6,13 +6,14 @@
  * @FilePath     : \react-electron-typescript\src\main\index.ts
  * @Description  :
  */
-import { app, BrowserWindow, ipcMain } from "electron";
+import "reflect-metadata";
+import { app, BrowserWindow } from "electron";
 import path from "path";
-import { IPC_CODE } from "constant";
+import { bootstrap, destroy } from "./bootstrap";
 
 const isDev = process.env["NODE_ENV"] === "development";
 
-function createWindow() {
+async function createWindow() {
   const w = new BrowserWindow({
     width: 1000,
     height: 600,
@@ -28,10 +29,19 @@ function createWindow() {
     },
   });
 
+  await bootstrap(w.webContents);
+
   if (isDev) w.loadURL("http://localhost:9000/").then();
   // 生产环境应使用相对地址
   // 打包后的根目录为 app/
   else w.loadFile("./dist/index.html").then();
+
+  if (isDev) w.webContents.openDevTools();
+
+  w.on("closed", () => {
+    destroy();
+    w.destroy();
+  })
 
   return w;
 }
@@ -43,7 +53,7 @@ app.whenReady().then(() => {
   // only in macOS
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      createWindow().then();
     }
   });
 });
@@ -53,17 +63,3 @@ app.on("window-all-closed", function () {
     app.quit();
   }
 });
-
-function ipc(ipcCode: string) : any {
-  return (func) => {
-    ipcMain.handle(ipcCode, func);
-  }
-}
-
-export class IPC {
-  @ipc(IPC_CODE.getVersions)
-  static async getVersions(evt, ...args) {
-    console.log(...args);
-    return "16";
-  }
-}

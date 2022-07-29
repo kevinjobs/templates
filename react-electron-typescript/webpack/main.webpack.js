@@ -10,7 +10,8 @@ const path = require('path');
 const { babelTsLoader } = require("./rules");
 
 const srcMainPath = path.join(__dirname, "../src/main");
-const srcPreloadPath = path.join(__dirname, "../src/preload");
+const preloadPath = path.join(__dirname, "../src/preload");
+const constantPath = path.join(__dirname, "../src/constant");
 
 module.exports = {
   target: "electron-main",
@@ -27,13 +28,13 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "constant": path.join(__dirname, "../src/constant")
+      "constant": constantPath,
     },
     extensions: [".ts", ".js"],
   },
   module: {
     rules: [
-      babelTsLoader(srcMainPath, srcPreloadPath),
+      babelTsLoader(srcMainPath, preloadPath, constantPath),
     ]
   }
 }

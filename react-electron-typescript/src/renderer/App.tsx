@@ -33,23 +33,30 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [isVisible, setIsVisible] = React.useState(false);
-  const [versions, setVersions] = React.useState("0");
+  const [replyMsg, setReplyMsg] = React.useState("");
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.info(window.ipc.sayHello());
+    window.ipc.sendMsg("hello, world").then();
+
     setIsVisible(!isVisible);
   };
 
   React.useEffect(() => {
-    window.ipc.getVersions().then(v => setVersions(v));
+    const timer = setInterval(() => {
+      window.ipc.receiveMsg().then(msg => {
+        console.log(msg);
+        setReplyMsg(msg);
+      });
+    }, 500);
+    return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="my-app" style={{ textAlign: "center" }}>
       <h2>hello, world!</h2>
       <div className={"versions"}>
-        <span>{ versions }</span>
+        <span>{ replyMsg }</span>
       </div>
       <div>
         <button onClick={handleClick}>
